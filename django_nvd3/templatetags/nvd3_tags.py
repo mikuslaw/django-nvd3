@@ -76,7 +76,7 @@ def load_chart(chart_type, series, container, kw_extra={}, *args, **kwargs):
 
 
 @register.simple_tag
-def include_container(include_container, height=400, width=600):
+def include_container(include_container, height=400, width=None):
     """
     Include the html for the chart container and css for nvd3
     This will include something similar as :
@@ -95,7 +95,8 @@ def include_container(include_container, height=400, width=600):
     chart = NVD3Chart()
     chart.name = str(include_container)
     chart.set_graph_height(height)
-    chart.set_graph_width(width)
+    if width != None:
+        chart.set_graph_width(width)
     chart.buildcontainer()
 
     return mark_safe(chart.container + '\n')
